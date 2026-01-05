@@ -7,7 +7,7 @@ test('Should do login as an administrator', async ({page}) => {
   await page.login.visit()
   await page.login.submit(email, password)
   
-  await page.urlValidation.validateUrl(/.*movies/)
+  await page.login.validateLogin('Admin')
 }) 
 
 test('Should not do login with wrong e-mail', async ({ page }) => {

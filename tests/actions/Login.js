@@ -9,6 +9,11 @@ export class Login {
         await this.page.goto('/admin/login')
     }
 
+    async validateLogin(userName){
+        await this.page.waitForSelector('.navbar')
+        expect(this.page.locator('.logged-user')).toHaveText('Olá, ' + userName)
+    }
+
     async submit(email, password) {
         const form = this.page.locator('.login-form')
         

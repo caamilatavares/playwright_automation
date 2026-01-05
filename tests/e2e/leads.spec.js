@@ -7,9 +7,9 @@ test('Should registrate a lead on the wait list', async ({ page }) => {
   const randomName = faker.person.firstName()
   const randomEmail = faker.internet.email()
 
-  await page.landingPage.visit()
-  await page.landingPage.openLeadModal()
-  await page.landingPage.submitLeadForm(randomName, randomEmail)
+  await page.leads.visit()
+  await page.leads.openLeadModal()
+  await page.leads.submitLeadForm(randomName, randomEmail)
   await page.toast.validateToastMessage(message)
 });
 
@@ -27,9 +27,9 @@ test('Should not registrate twice with the same e-mail', async ({ page, request 
 
   expect(newLead.ok()).toBeTruthy()
   
-  await page.landingPage.visit();
-  await page.landingPage.openLeadModal();
-  await page.landingPage.submitLeadForm(randomName, randomEmail);
+  await page.leads.visit();
+  await page.leads.openLeadModal();
+  await page.leads.submitLeadForm(randomName, randomEmail);
   await page.toast.validateToastMessage(message);
 })
 
@@ -38,9 +38,9 @@ test('Should not registrate a lead with incorrect e-mail', async ({ page }) => {
   const email = 'test@automation'
   const message = 'Email incorreto'
 
-  await page.landingPage.visit();
-  await page.landingPage.openLeadModal();
-  await page.landingPage.submitLeadForm(name, email);
+  await page.leads.visit();
+  await page.leads.openLeadModal();
+  await page.leads.submitLeadForm(name, email);
   await page.alert.inputAlertsValidation(message);
 });
 
@@ -49,9 +49,9 @@ test('Should not registrate without name', async ({ page }) => {
   const email = 'test@automation.com'
   const message = 'Campo obrigatório'
 
-  await page.landingPage.visit();
-  await page.landingPage.openLeadModal();
-  await page.landingPage.submitLeadForm(name, email);
+  await page.leads.visit();
+  await page.leads.openLeadModal();
+  await page.leads.submitLeadForm(name, email);
   await page.alert.inputAlertsValidation(message);
 });
 
@@ -60,9 +60,9 @@ test('Should not registrate without e-mail', async ({ page }) => {
   const email = ''
   const message = 'Campo obrigatório'
 
-  await page.landingPage.visit();
-  await page.landingPage.openLeadModal();
-  await page.landingPage.submitLeadForm(name, email);
+  await page.leads.visit();
+  await page.leads.openLeadModal();
+  await page.leads.submitLeadForm(name, email);
   await page.alert.inputAlertsValidation(message);
 
 });
@@ -75,8 +75,8 @@ test('Should not registrate without e-mail and name', async ({ page }) => {
     'Campo obrigatório'
   ]
 
-  await page.landingPage.visit();
-  await page.landingPage.openLeadModal();
-  await page.landingPage.submitLeadForm(name, email);
+  await page.leads.visit();
+  await page.leads.openLeadModal();
+  await page.leads.submitLeadForm(name, email);
   await page.alert.inputAlertsValidation(message);
 });

@@ -37,6 +37,6 @@ export class Movies {
             .filter({ hasText: releaseYear })
             .click()
 
-        await this.SendForm()
+        await this.sendForm()
     }
 }
