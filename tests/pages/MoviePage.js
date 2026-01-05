@@ -1,7 +1,7 @@
 import { expect } from '@playwright/test'
 
 export class Movies {
-    constructor(page){
+    constructor(page) {
         this.page = page
     }
 
@@ -9,8 +9,18 @@ export class Movies {
         await this.page.goto('/admin');
     }
 
-    async createNewMovies(title, overview, company, releaseYear){
+    async goForm() {
         await this.page.locator("a[href$='register']").click()
+    }
+
+    async sendForm() {
+        await this.page.getByRole('button', { name: 'Cadastrar' })
+            .click()
+    }
+
+    async createNewMovies(title, overview, company, releaseYear) {
+
+        await this.goForm()
 
         await this.page.locator('#title').fill(title)
         await this.page.locator('#overview').fill(overview)
@@ -27,7 +37,6 @@ export class Movies {
             .filter({ hasText: releaseYear })
             .click()
 
-        await this.page.getByRole('button', {name: 'Cadastrar'})
-            .click()
+        await this.SendForm()
     }
 }

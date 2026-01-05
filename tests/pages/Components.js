@@ -17,7 +17,7 @@ export class Alert {
         this.page = page
     }
 
-    async inputAlerts(message) {
+    async inputAlertsValidation(message) {
         await expect(this.page.locator("span[class$='alert']")).toHaveText(message)
     }
 }

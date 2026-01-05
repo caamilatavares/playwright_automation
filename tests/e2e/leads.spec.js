@@ -41,7 +41,7 @@ test('Should not registrate a lead with incorrect e-mail', async ({ page }) => {
   await page.landingPage.visit();
   await page.landingPage.openLeadModal();
   await page.landingPage.submitLeadForm(name, email);
-  await page.alert.inputAlerts(message);
+  await page.alert.inputAlertsValidation(message);
 });
 
 test('Should not registrate without name', async ({ page }) => {
@@ -52,7 +52,7 @@ test('Should not registrate without name', async ({ page }) => {
   await page.landingPage.visit();
   await page.landingPage.openLeadModal();
   await page.landingPage.submitLeadForm(name, email);
-  await page.alert.inputAlerts(message);
+  await page.alert.inputAlertsValidation(message);
 });
 
 test('Should not registrate without e-mail', async ({ page }) => {
@@ -63,7 +63,7 @@ test('Should not registrate without e-mail', async ({ page }) => {
   await page.landingPage.visit();
   await page.landingPage.openLeadModal();
   await page.landingPage.submitLeadForm(name, email);
-  await page.alert.inputAlerts(message);
+  await page.alert.inputAlertsValidation(message);
 
 });
 
@@ -78,5 +78,5 @@ test('Should not registrate without e-mail and name', async ({ page }) => {
   await page.landingPage.visit();
   await page.landingPage.openLeadModal();
   await page.landingPage.submitLeadForm(name, email);
-  await page.alert.inputAlerts(message);
+  await page.alert.inputAlertsValidation(message);
 });

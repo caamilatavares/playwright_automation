@@ -43,5 +43,5 @@ test('Should not do login without credentials', async ({ page }) => {
   await page.login.visit()
   await page.login.submit(email, password)
   
-  await page.alert.inputAlerts(message)
+  await page.alert.inputAlertsValidation(message)
 })

@@ -24,3 +24,18 @@ test('Should registrate new movies', async ({ page }) => {
     await page.movies.createNewMovies(movie.title, movie.overview, movie.company, movie.release_year)
     await page.toast.validateToastMessage(message)
 })
+
+test('Should not registrate a new movie without mandatory fields', async ({ page }) => {
+    await page.movies.visit()
+    await page.movies.goForm()
+    await page.movies.sendForm()
+
+    const alertMessage = [
+        'Por favor, informe o título.',
+        'Por favor, informe a sinopse.',
+        'Por favor, informe a empresa distribuidora.',
+        'Por favor, informe o ano de lançamento.'
+    ]
+
+    await page.alert.inputAlertsValidation(alertMessage)
+})
