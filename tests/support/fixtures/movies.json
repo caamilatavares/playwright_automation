@@ -5,22 +5,22 @@
         "featured": true,
         "release_year": 1974,
         "company": "Netflix",
-        "cover": "/images/night_of_the_living_dead.png"
+        "cover": "/covers/movies/mortos-vivos.jpg"
     },
     "movie_2": {
         "title": "Dawn of the Dead",
         "overview": "Sobreviventes de um apocalipse zumbi se escondem em um shopping center enquanto enfrentam tanto os mortos-vivos quanto a própria natureza humana.",
-        "featured": true,
+        "featured": false,
         "release_year": 1978,
-        "company": "United Film Distribution Company",
-        "cover": "/images/dawn_of_the_dead_1978.png"
+        "company": "Amazon Studios",
+        "cover": "/covers/movies/madrugada.jpg"
     },
     "movie_3": {
         "title": "28 Days Later",
         "overview": "Após um vírus devastador escapar de um laboratório, um homem acorda de um coma em uma Londres completamente tomada por infectados extremamente violentos.",
         "featured": true,
         "release_year": 2002,
-        "company": "DNA Films",
+        "company": "Netflix",
         "cover": "/images/28_days_later.png"
     },
     "movie_4": {

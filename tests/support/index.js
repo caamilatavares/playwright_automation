@@ -1,26 +1,36 @@
 const { test: base, expect } = require('@playwright/test')
 
-const { Login } = require('../actions/Login')
-const { UrlValidation } = require('../actions/Components')
-const { Movies } = require('../actions/Movies')
-const { Toast } = require('../actions/Components')
-const { Alert } = require('../actions/Components')
-const { Leads } = require('../actions/Leads')
+const API_BASE_URL = 'http://localhost:3333'
+
+const { Login } = require('../support/actions/Login')
+const { UrlValidation } = require('../support/actions/Components')
+const { Movies } = require('../support/actions/Movies')
+const { Toast } = require('../support/actions/Components')
+const { Alert } = require('../support/actions/Components')
+const { Leads } = require('../support/actions/Leads')
+const { Api } = require('./api')
 
 
 const test = base.extend({
     page: async ({ page }, use) => {
-
         const context = page
 
         context['leads'] = new Leads(page)
-        context['login'] = new Login(page),
-        context['urlValidation'] = new UrlValidation(page),
-        context['movies'] = new Movies(page),
-        context['toast'] = new Toast(page),
-        context['alert'] = new Alert(page),
+        context['login'] = new Login(page)
+        context['urlValidation'] = new UrlValidation(page)
+        context['movies'] = new Movies(page)
+        context['toast'] = new Toast(page)
+        context['alert'] = new Alert(page)
 
         await use(context)
+    },
+
+    request: async ({ request }, use) => {
+        const context = request
+        
+        context['api'] = new Api(request)
+
+        await use(context)   
     }
 })
 

@@ -4,6 +4,10 @@ const data = require('../support/fixtures/movies.json')
 
 const { executeSQL } = require('../support/database')
 
+test.beforeAll(async () => {
+    await executeSQL(`DELETE FROM movies;`)
+})
+
 test.beforeEach(async ({ page }) => {
     const email = 'admin@zombieplus.com'
     const password = 'pwd123'
@@ -16,13 +20,15 @@ test.beforeEach(async ({ page }) => {
 test('Should registrate new movies', async ({ page }) => {
     const movie = data.movie_1
 
-    await executeSQL(`DELETE FROM movies WHERE title = '${movie.title}';`)
-
     const message = /Cadastro realizado com sucesso!/
 
     await page.movies.visit()
-    await page.movies.createNewMovies(movie.title, movie.overview, movie.company, movie.release_year)
+    await page.movies.createNewMovies(movie.title, movie.overview, movie.company, movie.release_year, movie.cover, movie.featured)
     await page.toast.validateToastMessage(message)
+
+    movie.featured == true ? 
+        await page.movies.verifyFeaturedMovie(movie.title)
+        : ""
 })
 
 test('Should not registrate a new movie without mandatory fields', async ({ page }) => {
@@ -39,3 +45,19 @@ test('Should not registrate a new movie without mandatory fields', async ({ page
 
     await page.alert.inputAlertsValidation(alertMessage)
 })
+
+test('Should not registrate a movie that already exisist', async ({ page, request }) => {
+    const movie = data.movie_2
+    const message = /Este conteúdo já encontra-se cadastrado no catálogo/
+    const email = 'admin@zombieplus.com'
+    const password = 'pwd123' 
+    
+    const token = await request.api.createSession(email, password)
+    const companyId = await request.api.getCompanyId(token, movie.company)
+    await request.api.createMovie(token, companyId, movie)
+    
+    await page.movies.createNewMovies(movie.title, movie.overview, movie.company, movie.release_year, movie.cover, movie.featured)
+    await page.toast.validateToastMessage(message)
+})
+
+    

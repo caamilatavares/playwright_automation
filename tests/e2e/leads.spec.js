@@ -18,15 +18,8 @@ test('Should not registrate twice with the same e-mail', async ({ page, request 
   const randomName = faker.person.firstName()
   const randomEmail = faker.internet.email()
 
-  const newLead = await request.post('http://localhost:3333/leads', {
-    data: {
-      email: randomEmail,
-      name: randomName
-    }
-  })
+  await request.api.createLead(randomEmail, randomName)
 
-  expect(newLead.ok()).toBeTruthy()
-  
   await page.leads.visit();
   await page.leads.openLeadModal();
   await page.leads.submitLeadForm(randomName, randomEmail);
