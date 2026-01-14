@@ -28,24 +28,24 @@
         "overview": "Um homem comum tenta consertar sua vida amorosa e familiar enquanto enfrenta um inesperado apocalipse zumbi em Londres, misturando humor e terror.",
         "featured": false,
         "release_year": 2004,
-        "company": "Working Title Films",
-        "cover": "/images/shaun_of_the_dead.png"
+        "company": "Netflix",
+        "cover": "/covers/movies/shaun_of_the_dead.png"
     },
     "movie_5": {
         "title": "Resident Evil",
         "overview": "Uma equipe militar entra em um laboratório subterrâneo após um vírus escapar e transformar cientistas em zumbis mortais.",
         "featured": false,
         "release_year": 2002,
-        "company": "Constantin Film",
-        "cover": "/images/resident_evil.png"
+        "company": "Netflix",
+        "cover": "/covers/movies/resident_evil.jpg"
     },
     "movie_6": {
         "title": "World War Z",
         "overview": "Um ex-investigador da ONU viaja pelo mundo tentando descobrir a origem de uma pandemia zumbi que ameaça extinguir a humanidade.",
         "featured": true,
         "release_year": 2013,
-        "company": "Paramount Pictures",
-        "cover": "/images/world_war_z.png"
+        "company": "Sony Pictures",
+        "cover": "/covers/movies/wwz.png"
     },
     "movie_7": {
         "title": "Train to Busan",

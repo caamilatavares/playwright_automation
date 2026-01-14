@@ -1,20 +1,26 @@
-const { test, expect } = require('../support')
+const { test } = require('../support')
+
+const { executeSQL } = require('../support/database')
 
 import { faker } from '@faker-js/faker'
 
+test.beforeAll(async () => {
+    await executeSQL(`DELETE FROM leads;`)
+})
+
 test('Should registrate a lead on the wait list', async ({ page }) => {
-  const message = 'Agradecemos por compartilhar seus dados conosco. Em breve, nossa equipe entrará em contato!'
+  const message = 'Agradecemos por compartilhar seus dados conosco. Em breve, nossa equipe entrará em contato.'
   const randomName = faker.person.firstName()
   const randomEmail = faker.internet.email()
 
   await page.leads.visit()
   await page.leads.openLeadModal()
   await page.leads.submitLeadForm(randomName, randomEmail)
-  await page.toast.validateToastMessage(message)
+  await page.modal.validateModalMessage(message)
 });
 
 test('Should not registrate twice with the same e-mail', async ({ page, request }) => {
-  const message = 'O endereço de e-mail fornecido já está registrado em nossa fila de espera.'
+  const message = /Verificamos que o endereço de e-mail fornecido já consta em nossa lista de espera/
   const randomName = faker.person.firstName()
   const randomEmail = faker.internet.email()
 
@@ -23,7 +29,7 @@ test('Should not registrate twice with the same e-mail', async ({ page, request 
   await page.leads.visit();
   await page.leads.openLeadModal();
   await page.leads.submitLeadForm(randomName, randomEmail);
-  await page.toast.validateToastMessage(message);
+  await page.modal.validateModalMessage(message);
 })
 
 test('Should not registrate a lead with incorrect e-mail', async ({ page }) => {

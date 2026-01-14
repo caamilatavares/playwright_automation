@@ -5,7 +5,7 @@ const API_BASE_URL = 'http://localhost:3333'
 const { Login } = require('../support/actions/Login')
 const { UrlValidation } = require('../support/actions/Components')
 const { Movies } = require('../support/actions/Movies')
-const { Toast } = require('../support/actions/Components')
+const { Modal } = require('../support/actions/Components')
 const { Alert } = require('../support/actions/Components')
 const { Leads } = require('../support/actions/Leads')
 const { Api } = require('./api')
@@ -19,7 +19,7 @@ const test = base.extend({
         context['login'] = new Login(page)
         context['urlValidation'] = new UrlValidation(page)
         context['movies'] = new Movies(page)
-        context['toast'] = new Toast(page)
+        context['modal'] = new Modal(page)
         context['alert'] = new Alert(page)
 
         await use(context)
@@ -29,6 +29,8 @@ const test = base.extend({
         const context = request
         
         context['api'] = new Api(request)
+
+        await context['api'].createSession()
 
         await use(context)   
     }

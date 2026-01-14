@@ -1,14 +1,16 @@
-import { test, expect } from '@playwright/test';
+import { expect } from '@playwright/test';
 
-export class Toast {
+export class Modal {
 
     constructor(page) {
         this.page = page
     }
 
-    async validateToastMessage(message) {
-        await expect(this.page.locator('.toast')).toHaveText(message)
-        await this.page.waitForSelector('.toast', { state: 'hidden' });
+    async validateModalMessage(message) {
+        const modal = this.page.locator('#swal2-html-container')
+
+        await expect(modal).toHaveText(message)
+        await this.page.locator('.swal2-confirm').click()
     }
 }
 

@@ -45,17 +45,46 @@ export class Movies {
 
         await this.page.locator('input[name=cover]').setInputFiles('tests/support/fixtures' + cover)
 
-        featured == true ? 
-            await this.page.locator('.featured .react-switch').click() 
+        featured == true ?
+            await this.page.locator('.featured .react-switch').click()
             : ""
 
         await this.sendForm()
     }
 
-    async verifyFeaturedMovie(movieTitle){
+    async verifyFeaturedMovie(movieTitle) {
         await this.page.locator('.logout').click()
 
         const coverName = await this.page.locator(`img[alt='${movieTitle}']`)
         expect(coverName).toBeVisible()
+    }
+
+    async deleteMovie(title) {
+        await this.page.reload()
+        await this.page.waitForLoadState('networkidle')
+
+        await this.page.locator(`tr:has-text("${title}")`)
+            .locator('.remove-item')
+            .click()
+
+        await this.page.locator('.tooltip')
+            .locator('.confirm-removal')
+            .click()
+    }
+
+    async verifyMovieExclusion(title){
+          await expect(this.page.locator(`tr:has-text("${title}")`))
+          .toBeHidden()
+    }
+
+    async searchMovie(title){
+        await this.page.getByPlaceholder('Busque pelo nome').fill(title)
+        await this.page.locator('.actions')
+          .locator("button[type=submit]").click()
+    }
+
+    async verifySearch(title){
+        await expect(this.page.locator(`tr:has-text("${title}")`))
+          .toBeVisible()
     }
 }
