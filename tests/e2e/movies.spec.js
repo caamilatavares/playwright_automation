@@ -9,8 +9,8 @@ test.beforeAll(async () => {
 })
 
 test.beforeEach(async ({ page }) => {
-    const email = 'admin@zombieplus.com'
-    const password = 'pwd123'
+    const email = process.env.ADMIN_USER
+    const password = process.env.ADMIN_PASSWORD
 
     await page.login.visit()
     await page.login.submit(email, password)
@@ -20,11 +20,11 @@ test.beforeEach(async ({ page }) => {
 test('Should registrate new movies', async ({ page }) => {
     const movie = data.movie_1
 
-    const message = /Cadastro realizado com sucesso!/
+    const message = `O filme '${movie.title}' foi adicionado ao catálogo.`
 
     await page.movies.visit()
     await page.movies.createNewMovies(movie.title, movie.overview, movie.company, movie.release_year, movie.cover, movie.featured)
-    await page.toast.validateToastMessage(message)
+    await page.modal.validateModalMessage(message)
 
     movie.featured == true ? 
         await page.movies.verifyFeaturedMovie(movie.title)
@@ -37,10 +37,10 @@ test('Should not registrate a new movie without mandatory fields', async ({ page
     await page.movies.sendForm()
 
     const alertMessage = [
-        'Por favor, informe o título.',
-        'Por favor, informe a sinopse.',
-        'Por favor, informe a empresa distribuidora.',
-        'Por favor, informe o ano de lançamento.'
+        'Campo obrigatório',
+        'Campo obrigatório',
+        'Campo obrigatório',
+        'Campo obrigatório'
     ]
 
     await page.alert.inputAlertsValidation(alertMessage)
@@ -48,16 +48,32 @@ test('Should not registrate a new movie without mandatory fields', async ({ page
 
 test('Should not registrate a movie that already exisist', async ({ page, request }) => {
     const movie = data.movie_2
-    const message = /Este conteúdo já encontra-se cadastrado no catálogo/
-    const email = 'admin@zombieplus.com'
-    const password = 'pwd123' 
-    
-    const token = await request.api.createSession(email, password)
-    const companyId = await request.api.getCompanyId(token, movie.company)
-    await request.api.createMovie(token, companyId, movie)
+    const message = `O título '${movie.title}' já consta em nosso catálogo. Por favor, verifique se há necessidade de atualizações ou correções para este item.`
+
+    const companyId = await request.api.getCompanyId(movie.company)
+    await request.api.createMovie(companyId, movie)
     
     await page.movies.createNewMovies(movie.title, movie.overview, movie.company, movie.release_year, movie.cover, movie.featured)
-    await page.toast.validateToastMessage(message)
+    await page.modal.validateModalMessage(message)
 })
 
+test('Should remove movie from the list', async ({ page, request }) => {
+    const movie = data.movie_5
+
+    const companyId = await request.api.getCompanyId(movie.company)
+    await request.api.createMovie(companyId, movie)
     
+    await page.movies.deleteMovie(movie.title)
+    await page.modal.validateModalMessage('Filme removido com sucesso.')
+    await page.movies.verifyMovieExclusion(movie.title)
+})
+
+test('Shoud search for a movie', async ({ page, request }) => {
+    const movie = data.movie_6
+
+    const companyId = await request.api.getCompanyId(movie.company)
+    await request.api.createMovie(companyId, movie)
+
+    await page.movies.searchMovie(movie.title)
+    await page.movies.verifySearch(movie.title)
+})

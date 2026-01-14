@@ -5,10 +5,14 @@ export class Api {
     constructor(request) {
         this.request = request
         this.companyId = undefined
+        this.token = undefined
+        this.baseUrlApi = process.env.BASE_API
+        this.user = process.env.ADMIN_USER
+        this.password = process.env.ADMIN_PASSWORD
     }
 
     async createLead(email, name) {
-        const newLead = await this.request.post('http://localhost:3333/leads', {
+        const newLead = await this.request.post(`${this.baseUrlApi}/leads`, {
             data: {
                 email: email,
                 name: name
@@ -18,10 +22,13 @@ export class Api {
         expect(newLead.ok()).toBeTruthy()
     }
 
-    async createSession(user, password) {
-        const newSession = await this.request.post('http://localhost:3333/sessions', {
+    async createSession() {
+        const email = this.user
+        const password = this.password
+        
+        const newSession = await this.request.post(`${this.baseUrlApi}/sessions`, {
             data: {
-                email: user,
+                email: email,
                 password: password
             }
         })
@@ -33,10 +40,10 @@ export class Api {
         return this.token = body.token
     }
 
-    async getCompanyId(token, companyName) {
-        const getCompany = await this.request.get('http://localhost:3333/companies', {
+    async getCompanyId(companyName) {
+        const getCompany = await this.request.get(`${this.baseUrlApi}/companies`, {
             headers: {
-                Authorization: 'Bearer ' + token,
+                Authorization: 'Bearer ' + this.token,
                 Accept: 'application/json, text/plain, */*'
             },
             params: {
@@ -53,11 +60,11 @@ export class Api {
         return this.companyId
     }
 
-    async createMovie(token, companyId, movie) {
-        const newMovie = await this.request.post('http://localhost:3333/movies', {
+    async createMovie(companyId, movie) {
+        const newMovie = await this.request.post(`${this.baseUrlApi}/movies`, {
             headers: {
                 ContentType: 'multipart/form-data',
-                Authorization: 'Bearer ' + token,
+                Authorization: 'Bearer ' + this.token,
                 Accept: 'application/json, text/plain, */*'
             },
             multipart: {
@@ -69,6 +76,5 @@ export class Api {
             }
         })
         expect(newMovie.ok()).toBeTruthy()
-        console.log(await newMovie.text())
     }
 }
