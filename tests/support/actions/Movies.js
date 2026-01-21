@@ -1,9 +1,8 @@
 import { expect } from '@playwright/test'
 
 export class Movies {
-    constructor(page, request) {
+    constructor(page) {
         this.page = page
-        this.request = request
     }
 
     async visit() {
@@ -22,30 +21,30 @@ export class Movies {
             .click()
     }
 
-    async createNewMovies(title, overview, company, releaseYear, cover, featured) {
+    async createNewMovies(movie) {
 
         await this.goForm()
 
-        await this.page.locator('#title').fill(title)
-        await this.page.locator('#overview').fill(overview)
+        await this.page.locator('#title').fill(movie.title)
+        await this.page.locator('#overview').fill(movie.overview)
 
         await this.page.locator('#select_company_id .react-select__indicators')
             .click()
 
         await this.page.locator('.react-select__option')
-            .filter({ hasText: company })
+            .filter({ hasText: movie.company })
             .click()
 
         await this.page.locator('#select_year .react-select__indicators')
             .click()
 
         await this.page.locator('.react-select__option')
-            .filter({ hasText: releaseYear })
+            .filter({ hasText: movie.release_year })
             .click()
 
-        await this.page.locator('input[name=cover]').setInputFiles('tests/support/fixtures' + cover)
+        await this.page.locator('input[name=cover]').setInputFiles('tests/support/fixtures' + movie.cover)
 
-        featured == true ?
+        movie.featured == true ?
             await this.page.locator('.featured .react-switch').click()
             : ""
 

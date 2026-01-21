@@ -3,7 +3,7 @@
         "title": "Night of the Living Dead",
         "overview": "Um grupo de pessoas se refugia em uma casa isolada enquanto mortos-vivos se levantam e atacam os vivos, inaugurando o gênero moderno de filmes de zumbi.",
         "featured": true,
-        "release_year": 1974,
+        "release_year": 1980,
         "company": "Netflix",
         "cover": "/covers/movies/mortos-vivos.jpg"
     },
@@ -11,7 +11,7 @@
         "title": "Dawn of the Dead",
         "overview": "Sobreviventes de um apocalipse zumbi se escondem em um shopping center enquanto enfrentam tanto os mortos-vivos quanto a própria natureza humana.",
         "featured": false,
-        "release_year": 1978,
+        "release_year": 1990,
         "company": "Amazon Studios",
         "cover": "/covers/movies/madrugada.jpg"
     },

@@ -1,15 +1,13 @@
 const { test: base, expect } = require('@playwright/test')
 
-const API_BASE_URL = 'http://localhost:3333'
-
-const { Login } = require('../support/actions/Login')
-const { UrlValidation } = require('../support/actions/Components')
-const { Movies } = require('../support/actions/Movies')
-const { Modal } = require('../support/actions/Components')
-const { Alert } = require('../support/actions/Components')
-const { Leads } = require('../support/actions/Leads')
+const { Login } = require('./actions/Login')
+const { UrlValidation } = require('./actions/Components')
+const { Movies } = require('./actions/Movies')
+const { Modal } = require('./actions/Components')
+const { Alert } = require('./actions/Components')
+const { Leads } = require('./actions/Leads')
 const { Api } = require('./api')
-
+const { Auth } = require('./actions/Authentication')
 
 const test = base.extend({
     page: async ({ page }, use) => {
@@ -21,18 +19,17 @@ const test = base.extend({
         context['movies'] = new Movies(page)
         context['modal'] = new Modal(page)
         context['alert'] = new Alert(page)
+        context['api'] = new Api(page)
+        context['auth'] = new Auth(page)
 
         await use(context)
     },
-
     request: async ({ request }, use) => {
         const context = request
-        
+
         context['api'] = new Api(request)
 
-        await context['api'].createSession()
-
-        await use(context)   
+        await use(context)
     }
 })
 

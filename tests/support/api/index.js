@@ -1,18 +1,15 @@
-import { expect } from '@playwright/test'
+import { expect } from '@playwright/test';
 
-export class Api {
-
+export class Api {    
     constructor(request) {
         this.request = request
-        this.companyId = undefined
-        this.token = undefined
         this.baseUrlApi = process.env.BASE_API
         this.user = process.env.ADMIN_USER
         this.password = process.env.ADMIN_PASSWORD
     }
 
     async createLead(email, name) {
-        const newLead = await this.request.post(`${this.baseUrlApi}/leads`, {
+        const newLead = await this.request.post(this.baseUrlApi + "/leads", {
             data: {
                 email: email,
                 name: name
@@ -26,7 +23,7 @@ export class Api {
         const email = this.user
         const password = this.password
         
-        const newSession = await this.request.post(`${this.baseUrlApi}/sessions`, {
+        const newSession = await this.request.post(this.baseUrlApi + "/sessions", {
             data: {
                 email: email,
                 password: password
@@ -36,14 +33,21 @@ export class Api {
         expect(newSession.ok()).toBeTruthy()
 
         const body = JSON.parse(await newSession.text())
+            const token = body.token
+            const userId = body.user.id
 
-        return this.token = body.token
+        return {
+            token: token, 
+            userId: userId
+        }
     }
 
-    async getCompanyId(companyName) {
+    async getCompanyId(token, companyName) {
+        await this.createSession() 
+
         const getCompany = await this.request.get(`${this.baseUrlApi}/companies`, {
             headers: {
-                Authorization: 'Bearer ' + this.token,
+                Authorization: 'Bearer ' + token,
                 Accept: 'application/json, text/plain, */*'
             },
             params: {
@@ -55,16 +59,16 @@ export class Api {
 
         const body = JSON.parse(await getCompany.text())
 
-        this.companyId = body.data[0].id
+        const companyId = body.data[0].id
 
-        return this.companyId
+        return companyId
     }
 
-    async createMovie(companyId, movie) {
+    async createMovie(token, companyId, movie) {
         const newMovie = await this.request.post(`${this.baseUrlApi}/movies`, {
             headers: {
                 ContentType: 'multipart/form-data',
-                Authorization: 'Bearer ' + this.token,
+                Authorization: 'Bearer ' + token,
                 Accept: 'application/json, text/plain, */*'
             },
             multipart: {
@@ -76,5 +80,6 @@ export class Api {
             }
         })
         expect(newMovie.ok()).toBeTruthy()
-    }
+    } 
+
 }

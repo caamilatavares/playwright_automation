@@ -4,17 +4,18 @@ const data = require('../support/fixtures/movies.json')
 
 const { executeSQL } = require('../support/database')
 
-test.beforeAll(async () => {
+test.beforeAll(async ({ request }) => {
     await executeSQL(`DELETE FROM movies;`)
+    const session = await request.api.createSession()
+
+    process.env.ADMIN_TOKEN = session.token
+    process.env.ADMIN_ID = session.userId
 })
 
 test.beforeEach(async ({ page }) => {
-    const email = process.env.ADMIN_USER
-    const password = process.env.ADMIN_PASSWORD
-
     await page.login.visit()
-    await page.login.submit(email, password)
-    await page.urlValidation.validateUrl(/.*movies/)
+    await page.auth.setSessionStorage(process.env.ADMIN_TOKEN, process.env.ADMIN_ID)
+    await page.movies.visit()
 })
 
 test('Should registrate new movies', async ({ page }) => {
@@ -23,10 +24,10 @@ test('Should registrate new movies', async ({ page }) => {
     const message = `O filme '${movie.title}' foi adicionado ao catálogo.`
 
     await page.movies.visit()
-    await page.movies.createNewMovies(movie.title, movie.overview, movie.company, movie.release_year, movie.cover, movie.featured)
+    await page.movies.createNewMovies(movie)
     await page.modal.validateModalMessage(message)
 
-    movie.featured == true ? 
+    movie.featured == true ?
         await page.movies.verifyFeaturedMovie(movie.title)
         : ""
 })
@@ -49,20 +50,22 @@ test('Should not registrate a new movie without mandatory fields', async ({ page
 test('Should not registrate a movie that already exisist', async ({ page, request }) => {
     const movie = data.movie_2
     const message = `O título '${movie.title}' já consta em nosso catálogo. Por favor, verifique se há necessidade de atualizações ou correções para este item.`
+    const token = process.env.ADMIN_TOKEN
 
-    const companyId = await request.api.getCompanyId(movie.company)
-    await request.api.createMovie(companyId, movie)
-    
-    await page.movies.createNewMovies(movie.title, movie.overview, movie.company, movie.release_year, movie.cover, movie.featured)
+    const companyId = await request.api.getCompanyId(token, movie.company)
+    await request.api.createMovie(token, companyId, movie)
+
+    await page.movies.createNewMovies(movie)
     await page.modal.validateModalMessage(message)
 })
 
 test('Should remove movie from the list', async ({ page, request }) => {
     const movie = data.movie_5
+    const token = process.env.ADMIN_TOKEN
 
-    const companyId = await request.api.getCompanyId(movie.company)
-    await request.api.createMovie(companyId, movie)
-    
+    const companyId = await request.api.getCompanyId(token, movie.company)
+    await request.api.createMovie(token, companyId, movie)
+
     await page.movies.deleteMovie(movie.title)
     await page.modal.validateModalMessage('Filme removido com sucesso.')
     await page.movies.verifyMovieExclusion(movie.title)
@@ -70,9 +73,10 @@ test('Should remove movie from the list', async ({ page, request }) => {
 
 test('Shoud search for a movie', async ({ page, request }) => {
     const movie = data.movie_6
+    const token = process.env.ADMIN_TOKEN
 
-    const companyId = await request.api.getCompanyId(movie.company)
-    await request.api.createMovie(companyId, movie)
+    const companyId = await request.api.getCompanyId(token, movie.company)
+    await request.api.createMovie(token, companyId, movie)
 
     await page.movies.searchMovie(movie.title)
     await page.movies.verifySearch(movie.title)
