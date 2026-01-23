@@ -2,12 +2,13 @@ const { test: base, expect } = require('@playwright/test')
 
 const { Login } = require('./actions/Login')
 const { UrlValidation } = require('./actions/Components')
-const { Movies } = require('./actions/Movies')
 const { Modal } = require('./actions/Components')
 const { Alert } = require('./actions/Components')
 const { Leads } = require('./actions/Leads')
 const { Api } = require('./api')
 const { Auth } = require('./actions/Authentication')
+const { Media } = require('./actions/Media')
+const { Header } = require('./actions/Components')
 
 const test = base.extend({
     page: async ({ page }, use) => {
@@ -16,11 +17,12 @@ const test = base.extend({
         context['leads'] = new Leads(page)
         context['login'] = new Login(page)
         context['urlValidation'] = new UrlValidation(page)
-        context['movies'] = new Movies(page)
         context['modal'] = new Modal(page)
         context['alert'] = new Alert(page)
         context['api'] = new Api(page)
         context['auth'] = new Auth(page)
+        context['media'] = new Media(page)
+        context['header'] = new Header(page)
 
         await use(context)
     },

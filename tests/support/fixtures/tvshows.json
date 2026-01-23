@@ -1,0 +1,52 @@
+{
+    "tvshow_1": {
+        "title": "The Walking Dead",
+        "overview": "Após um apocalipse zumbi devastar o mundo, um grupo de sobreviventes liderado por Rick Grimes tenta encontrar segurança enfrentando mortos-vivos e humanos hostis.",
+        "company": "Lionsgate Films",
+        "seasons": "11",
+        "release_year": 2010,
+        "cover": "/tvshow_covers/the_walking_dead.jpg",
+        "featured": true,
+        "type": "TV Show"
+    },
+    "tvshow_2": {
+        "title": "All of Us Are Dead",
+        "overview": "Estudantes de uma escola coreana ficam presos enquanto um vírus zumbi se espalha rapidamente, forçando-os a lutar para sobreviver.",
+        "company": "Netflix",
+        "seasons": "2",
+        "release_year": 2022,
+        "cover": "/tvshow_covers/all_of_you_are_dead.jpg",
+        "featured": true,
+        "type": "TV Show"
+    },
+    "tvshow_3": {
+        "title": "Black Summer",
+        "overview": "Nas primeiras semanas de um apocalipse zumbi, estranhos precisam se unir para sobreviver em um mundo caótico e brutal.",
+        "company": "Netflix",
+        "seasons": "2",
+        "release_year": 2019,
+        "cover": "/tvshow_covers/black_summer.jpg",
+        "featured": false,
+        "type": "TV Show"
+    },
+    "tvshow_4": {
+        "title": "iZombie",
+        "overview": "Uma médica residente se transforma em zumbi e passa a usar suas habilidades especiais para ajudar a polícia a resolver crimes.",
+        "company": "Sony Pictures",
+        "seasons": "5",
+        "release_year": 2015,
+        "cover": "/tvshow_covers/izombie.jpg",
+        "featured": false,
+        "type": "TV Show"
+    },
+    "tvshow_5": {
+        "title": "Santa Clarita Diet",
+        "overview": "Uma corretora de imóveis se torna zumbi e precisa lidar com sua nova fome por carne humana enquanto mantém a vida familiar.",
+        "company": "Amazon Studios",
+        "seasons": "3",
+        "release_year": 2017,
+        "cover": "/tvshow_covers/santa_clarita_diet.jpg",
+        "featured": false,
+        "type": "TV Show"
+    }
+}

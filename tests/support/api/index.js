@@ -80,6 +80,24 @@ export class Api {
             }
         })
         expect(newMovie.ok()).toBeTruthy()
-    } 
+    }
 
+    async createTvShow(token, companyId, tvShow) {
+        const newTvShow = await this.request.post(`${this.baseUrlApi}/tvshows`, {
+            headers: {
+                ContentType: 'multipart/form-data',
+                Authorization: 'Bearer ' + token,
+                Accept: 'application/json, text/plain, */*'
+            },
+            multipart: {
+                title: tvShow.title,
+                overview: tvShow.overview,
+                company_id: companyId,
+                release_year: tvShow.release_year,
+                seasons: tvShow.seasons,
+                featured: tvShow.featured
+            }
+        })
+        expect(newTvShow.ok()).toBeTruthy()
+    } 
 }

@@ -15,7 +15,7 @@ test.beforeAll(async ({ request }) => {
 test.beforeEach(async ({ page }) => {
     await page.login.visit()
     await page.auth.setSessionStorage(process.env.ADMIN_TOKEN, process.env.ADMIN_ID)
-    await page.movies.visit()
+    await page.header.accessMenu('movies')
 })
 
 test('Should registrate new movies', async ({ page }) => {
@@ -23,25 +23,24 @@ test('Should registrate new movies', async ({ page }) => {
 
     const message = `O filme '${movie.title}' foi adicionado ao catálogo.`
 
-    await page.movies.visit()
-    await page.movies.createNewMovies(movie)
+    await page.media.createNewMedia(movie)
     await page.modal.validateModalMessage(message)
 
     movie.featured == true ?
-        await page.movies.verifyFeaturedMovie(movie.title)
+        await page.media.verifyFeaturedMedia(movie.title)
         : ""
 })
 
 test('Should not registrate a new movie without mandatory fields', async ({ page }) => {
-    await page.movies.visit()
-    await page.movies.goForm()
-    await page.movies.sendForm()
+
+    await page.media.goToMediaForm()
+    await page.media.registrateMedia()
 
     const alertMessage = [
         'Campo obrigatório',
         'Campo obrigatório',
         'Campo obrigatório',
-        'Campo obrigatório'
+        'Campo obrigatório',
     ]
 
     await page.alert.inputAlertsValidation(alertMessage)
@@ -55,7 +54,7 @@ test('Should not registrate a movie that already exisist', async ({ page, reques
     const companyId = await request.api.getCompanyId(token, movie.company)
     await request.api.createMovie(token, companyId, movie)
 
-    await page.movies.createNewMovies(movie)
+    await page.media.createNewMedia(movie)
     await page.modal.validateModalMessage(message)
 })
 
@@ -66,9 +65,10 @@ test('Should remove movie from the list', async ({ page, request }) => {
     const companyId = await request.api.getCompanyId(token, movie.company)
     await request.api.createMovie(token, companyId, movie)
 
-    await page.movies.deleteMovie(movie.title)
+    await page.media.deleteMedia(movie.title)
     await page.modal.validateModalMessage('Filme removido com sucesso.')
-    await page.movies.verifyMovieExclusion(movie.title)
+
+    await page.media.verifyMediaExclusion(movie.title)
 })
 
 test('Shoud search for a movie', async ({ page, request }) => {
@@ -78,6 +78,6 @@ test('Shoud search for a movie', async ({ page, request }) => {
     const companyId = await request.api.getCompanyId(token, movie.company)
     await request.api.createMovie(token, companyId, movie)
 
-    await page.movies.searchMovie(movie.title)
-    await page.movies.verifySearch(movie.title)
+    await page.media.searchMedia(movie.title)
+    await page.media.verifyMediaSearch(movie.title)
 })

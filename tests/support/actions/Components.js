@@ -25,6 +25,18 @@ export class Alert {
     }
 }
 
+export class Header {
+    constructor(page){
+        this.page = page
+    }
+
+    async accessMenu(path){
+        await this.page.goto('/admin')
+        await this.page.locator(`a[href='/admin/${path}']`)
+            .click()
+    }
+}
+
 export class UrlValidation {
     constructor(page) {
         this.page = page

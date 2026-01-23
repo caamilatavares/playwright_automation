@@ -5,7 +5,9 @@
         "featured": true,
         "release_year": 1980,
         "company": "Netflix",
-        "cover": "/covers/movies/mortos-vivos.jpg"
+        "cover": "/covers/movies/mortos-vivos.jpg",
+        "type": "Movie"
+
     },
     "movie_2": {
         "title": "Dawn of the Dead",
@@ -13,7 +15,8 @@
         "featured": false,
         "release_year": 1990,
         "company": "Amazon Studios",
-        "cover": "/covers/movies/madrugada.jpg"
+        "cover": "/covers/movies/madrugada.jpg",
+        "type": "Movie"
     },
     "movie_3": {
         "title": "28 Days Later",
@@ -21,7 +24,8 @@
         "featured": true,
         "release_year": 2002,
         "company": "Netflix",
-        "cover": "/images/28_days_later.png"
+        "cover": "/images/28_days_later.png",
+        "type": "Movie"
     },
     "movie_4": {
         "title": "Shaun of the Dead",
@@ -29,7 +33,8 @@
         "featured": false,
         "release_year": 2004,
         "company": "Netflix",
-        "cover": "/covers/movies/shaun_of_the_dead.png"
+        "cover": "/covers/movies/shaun_of_the_dead.png",
+        "type": "Movie"
     },
     "movie_5": {
         "title": "Resident Evil",
@@ -37,7 +42,8 @@
         "featured": false,
         "release_year": 2002,
         "company": "Netflix",
-        "cover": "/covers/movies/resident_evil.jpg"
+        "cover": "/covers/movies/resident_evil.jpg",
+        "type": "Movie"
     },
     "movie_6": {
         "title": "World War Z",
@@ -45,38 +51,7 @@
         "featured": true,
         "release_year": 2013,
         "company": "Sony Pictures",
-        "cover": "/covers/movies/wwz.png"
-    },
-    "movie_7": {
-        "title": "Train to Busan",
-        "overview": "Passageiros de um trem de alta velocidade lutam pela sobrevivência quando um surto zumbi se espalha rapidamente pela Coreia do Sul.",
-        "featured": true,
-        "release_year": 2016,
-        "company": "Netflix",
-        "cover": "/images/train_to_busan.png"
-    },
-    "movie_8": {
-        "title": "The Evil Dead",
-        "overview": "Cinco amigos libertam forças demoníacas durante uma viagem a uma cabana isolada, resultando em possessões violentas e criaturas grotescas.",
-        "featured": false,
-        "release_year": 1981,
-        "company": "Renaissance Pictures",
-        "cover": "/images/the_evil_dead.png"
-    },
-    "movie_9": {
-        "title": "Zombieland",
-        "overview": "Um grupo improvável de sobreviventes atravessa os Estados Unidos enfrentando zumbis com regras próprias de sobrevivência e muito humor ácido.",
-        "featured": false,
-        "release_year": 2009,
-        "company": "Columbia Pictures",
-        "cover": "/images/zombieland.png"
-    },
-    "movie_10": {
-        "title": "Day of the Dead",
-        "overview": "Cientistas e militares vivem em um bunker subterrâneo tentando encontrar uma solução para o apocalipse zumbi enquanto a tensão cresce.",
-        "featured": false,
-        "release_year": 1985,
-        "company": "Laurel Group",
-        "cover": "/images/day_of_the_dead.png"
+        "cover": "/covers/movies/wwz.png",
+        "type": "Movie"
     }
 }
