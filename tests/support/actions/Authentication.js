@@ -1,3 +1,4 @@
+// Class to define a process of authentication by setting local storage data
 export class Auth {
     constructor(page){
         this.page = page

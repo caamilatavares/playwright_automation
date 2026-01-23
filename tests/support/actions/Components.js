@@ -1,5 +1,8 @@
 import { expect } from '@playwright/test';
 
+// Class to define common components between features
+
+// Class to define modal component
 export class Modal {
 
     constructor(page) {
@@ -14,6 +17,7 @@ export class Modal {
     }
 }
 
+// Class to define alert component
 export class Alert {
 
     constructor(page) {
@@ -25,6 +29,7 @@ export class Alert {
     }
 }
 
+// Class to define header components
 export class Header {
     constructor(page){
         this.page = page
@@ -35,15 +40,4 @@ export class Header {
         await this.page.locator(`a[href='/admin/${path}']`)
             .click()
     }
-}
-
-export class UrlValidation {
-    constructor(page) {
-        this.page = page
-    }
-
-    async validateUrl(path) {
-        await this.page.waitForLoadState('networkidle')
-        await expect(this.page).toHaveURL(path)
-    }    
 }

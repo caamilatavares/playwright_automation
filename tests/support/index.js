@@ -1,7 +1,6 @@
 const { test: base, expect } = require('@playwright/test')
 
 const { Login } = require('./actions/Login')
-const { UrlValidation } = require('./actions/Components')
 const { Modal } = require('./actions/Components')
 const { Alert } = require('./actions/Components')
 const { Leads } = require('./actions/Leads')
@@ -16,7 +15,6 @@ const test = base.extend({
 
         context['leads'] = new Leads(page)
         context['login'] = new Login(page)
-        context['urlValidation'] = new UrlValidation(page)
         context['modal'] = new Modal(page)
         context['alert'] = new Alert(page)
         context['api'] = new Api(page)

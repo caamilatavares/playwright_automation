@@ -1,10 +1,12 @@
 import { expect } from "playwright/test"
 
+// Class to define components and actions commons to every media list (Leads, Tv Shows and Movies)
 export class Media {
     constructor(page){
         this.page = page
     }
 
+    // Access the forms
     async goToMediaForm() {
         const formButton = "a[href$='register']"
         await expect(this.page.locator(formButton)).toBeVisible()
@@ -12,11 +14,13 @@ export class Media {
         await this.page.locator(formButton).click()
     }
 
+    // Click on the registrate button to send the form
     async registrateMedia() {
         await this.page.getByRole('button', { name: 'Cadastrar' })
             .click()
     }
 
+    // Registrate media, filling the needed fields
     async createNewMedia(media){
         await this.goToMediaForm()
 
@@ -48,6 +52,7 @@ export class Media {
         await this.registrateMedia()
     }
 
+    // Verify if media was featured correctly
     async verifyFeaturedMedia(title) {
         await this.page.locator('.logout').click()
         this.page.waitForLoadState('networkidle')
@@ -57,17 +62,20 @@ export class Media {
         this.page.screenshot({fullPage: true})
     }
 
+    // Search for a media on the list
     async searchMedia(title){
         await this.page.getByPlaceholder('Busque pelo nome').fill(title)
         await this.page.locator('.actions')
           .locator("button[type=submit]").click()
     }
 
+    // Verify if search brought the media correctly
     async verifyMediaSearch(title){
         await expect(this.page.locator(`tr:has-text("${title}")`))
           .toBeVisible()
     }
 
+    // Delete media by the list button
     async deleteMedia(title) {
         await this.page.reload()
         await this.page.waitForLoadState('networkidle')
@@ -81,6 +89,7 @@ export class Media {
             .click()
     }
 
+    // Verify if the media was correctly deleted
     async verifyMediaExclusion(title){
           await expect(this.page.locator(`tr:has-text("${title}")`))
           .toBeHidden()
