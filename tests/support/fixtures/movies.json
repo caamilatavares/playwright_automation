@@ -5,7 +5,7 @@
         "featured": true,
         "release_year": 1980,
         "company": "Netflix",
-        "cover": "/covers/movies/mortos-vivos.jpg",
+        "cover": "/movies/mortos-vivos.jpg",
         "type": "Movie"
 
     },
@@ -15,7 +15,7 @@
         "featured": false,
         "release_year": 1990,
         "company": "Amazon Studios",
-        "cover": "/covers/movies/madrugada.jpg",
+        "cover": "/movies/madrugada.jpg",
         "type": "Movie"
     },
     "movie_3": {
@@ -24,7 +24,7 @@
         "featured": true,
         "release_year": 2002,
         "company": "Netflix",
-        "cover": "/images/28_days_later.png",
+        "cover": "/movies/warm-bodies.jpg",
         "type": "Movie"
     },
     "movie_4": {
@@ -33,7 +33,7 @@
         "featured": false,
         "release_year": 2004,
         "company": "Netflix",
-        "cover": "/covers/movies/shaun_of_the_dead.png",
+        "cover": "/movies/mortos-vivos-2.jpg",
         "type": "Movie"
     },
     "movie_5": {
@@ -42,7 +42,7 @@
         "featured": false,
         "release_year": 2002,
         "company": "Netflix",
-        "cover": "/covers/movies/resident_evil.jpg",
+        "cover": "/movies/resident_evil.jpg",
         "type": "Movie"
     },
     "movie_6": {
@@ -51,7 +51,7 @@
         "featured": true,
         "release_year": 2013,
         "company": "Sony Pictures",
-        "cover": "/covers/movies/wwz.png",
+        "cover": "/movies/wwz.png",
         "type": "Movie"
     }
 }

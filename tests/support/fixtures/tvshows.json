@@ -5,7 +5,7 @@
         "company": "Lionsgate Films",
         "seasons": "11",
         "release_year": 2010,
-        "cover": "/tvshow_covers/the_walking_dead.jpg",
+        "cover": "/tvshows/the_walking_dead.jpg",
         "featured": true,
         "type": "TV Show"
     },
@@ -15,7 +15,7 @@
         "company": "Netflix",
         "seasons": "2",
         "release_year": 2022,
-        "cover": "/tvshow_covers/all_of_you_are_dead.jpg",
+        "cover": "/tvshows/all_of_you_are_dead.jpg",
         "featured": true,
         "type": "TV Show"
     },
@@ -25,7 +25,7 @@
         "company": "Netflix",
         "seasons": "2",
         "release_year": 2019,
-        "cover": "/tvshow_covers/black_summer.jpg",
+        "cover": "/tvshows/black_summer.jpg",
         "featured": false,
         "type": "TV Show"
     },
@@ -35,7 +35,7 @@
         "company": "Sony Pictures",
         "seasons": "5",
         "release_year": 2015,
-        "cover": "/tvshow_covers/izombie.jpg",
+        "cover": "/tvshows/izombie.jpg",
         "featured": false,
         "type": "TV Show"
     },
@@ -45,7 +45,7 @@
         "company": "Amazon Studios",
         "seasons": "3",
         "release_year": 2017,
-        "cover": "/tvshow_covers/santa_clarita_diet.jpg",
+        "cover": "/tvshows/santa_clarita_diet.jpg",
         "featured": false,
         "type": "TV Show"
     }

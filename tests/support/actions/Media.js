@@ -43,7 +43,8 @@ export class Media {
             .filter({ hasText: media.release_year })
             .click()
 
-        await this.page.locator('input[name=cover]').setInputFiles('tests/support/fixtures' + media.cover)
+        await this.page.locator('input[name=cover]')
+            .setInputFiles('tests/support/fixtures/covers' + media.cover)
 
         media.featured == true ?
             await this.page.locator('.featured .react-switch').click()
