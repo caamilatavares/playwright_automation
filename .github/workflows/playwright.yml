@@ -30,7 +30,7 @@ jobs:
       # API
       - name: Install API dependencies
         working-directory: zombieplus/api
-        run: npm ci
+        run: npm install
 
       - name: Start API
         working-directory: zombieplus/api
@@ -39,7 +39,7 @@ jobs:
       # Web
       - name: Install Web dependencies
         working-directory: zombieplus/web
-        run: npm ci
+        run: npm install
 
       - name: Start Web
         working-directory: zombieplus/web
@@ -54,7 +54,7 @@ jobs:
 
       # Playwright
       - name: Install test dependencies
-        run: npm ci
+        run: npm install
 
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
