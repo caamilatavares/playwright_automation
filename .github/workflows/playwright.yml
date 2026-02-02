@@ -47,10 +47,10 @@ jobs:
 
       # Wait services
       - name: Wait for API
-        run: npx wait-on http://localhost:3000
+        run: npx wait-on http://localhost:3333
 
       - name: Wait for Web
-        run: npx wait-on http://localhost:5173
+        run: npx wait-on http://localhost:3000
 
       # Playwright
       - name: Install test dependencies
