@@ -34,7 +34,7 @@ jobs:
 
       - name: Start API
         working-directory: zombieplus/api
-        run: npm run dev
+        run: npm run start:ci &
 
       # Web
       - name: Install Web dependencies
@@ -43,7 +43,7 @@ jobs:
 
       - name: Start Web
         working-directory: zombieplus/web
-        run: npm run dev 
+        run: npm run start:ci &
 
       # Wait services
       - name: Wait for API
