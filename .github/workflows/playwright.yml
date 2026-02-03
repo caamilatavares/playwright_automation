@@ -27,7 +27,7 @@ jobs:
           ref: main
           path: zombieplus
 
-      # API
+      # API.
       - name: Install API dependencies
         working-directory: zombieplus/api
         run: npm install
