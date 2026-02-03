@@ -1,4 +1,3 @@
-#
 name: Playwright Tests
 
 on:
@@ -13,7 +12,7 @@ jobs:
     timeout-minutes: 60
 
     steps:
-      # Repo de testes (Playwright)
+      # Playwright repo
       - name: Checkout Playwright repo
         uses: actions/checkout@v4
 
@@ -22,7 +21,7 @@ jobs:
         with:
           node-version: 24.12.0
 
-      # Repo ZombiePlus (API + Web)
+      # ZombiePlus monorepo
       - name: Checkout ZombiePlus (API + Web)
         uses: actions/checkout@v4
         with:
@@ -30,9 +29,7 @@ jobs:
           ref: main
           path: zombieplus
 
-      # ======================
       # API
-      # ======================
       - name: Install API dependencies
         working-directory: zombieplus/api
         run: npm install
@@ -41,30 +38,23 @@ jobs:
         working-directory: zombieplus/api
         run: npm run start:ci &
 
-      - name: Wait for API
-        run: npx wait-on http://localhost:3333 --timeout 10000
-
-      # ======================
-      # WEB
-      # ======================
+      # Web (build já commitado)
       - name: Install Web dependencies
         working-directory: zombieplus/web
         run: npm install
-
-      - name: Build Web
-        working-directory: zombieplus/web
-        run: npm run build
 
       - name: Start Web
         working-directory: zombieplus/web
         run: npm run start:ci &
 
-      - name: Wait for Web
-        run: npx wait-on http://localhost:3000 --timeout 10000
+      # Wait
+      - name: Wait for API
+        run: npx wait-on http://localhost:3333 --timeout 20000
 
-      # ======================
-      # PLAYWRIGHT
-      # ======================
+      - name: Wait for Web
+        run: npx wait-on http://localhost:3000 --timeout 20000
+
+      # Playwright
       - name: Install test dependencies
         run: npm install
 
