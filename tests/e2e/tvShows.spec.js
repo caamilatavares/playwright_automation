@@ -25,7 +25,7 @@ test('Should registrate new tv shows', async ({ page }) => {
     await page.media.createNewMedia(tvShow)
     await page.modal.validateModalMessage(message)
 
-    movie.featured == true ?
+    tvShow.featured == true ?
         await page.media.verifyMediaSearch(tvShow.title)
         : ""
 })

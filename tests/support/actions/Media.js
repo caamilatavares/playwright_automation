@@ -56,11 +56,10 @@ export class Media {
     // Verify if media was featured correctly
     async verifyFeaturedMedia(title) {
         await this.page.locator('.logout').click()
-        this.page.waitForLoadState('networkidle')
+        await this.page.waitForLoadState('networkidle')
 
         const coverName = await this.page.locator(`img[alt='${title}']`)
         expect(coverName).toBeVisible()
-        this.page.screenshot({fullPage: true})
     }
 
     // Search for a media on the list

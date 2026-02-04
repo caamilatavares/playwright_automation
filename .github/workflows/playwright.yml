@@ -11,6 +11,32 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 60
 
+    env:
+      # Playwright / Web
+      BASE_API: ${{ secrets.BASE_API }}
+      BASE_URL: ${{ secrets.BASE_URL }}
+
+      # API - App
+      PORT: 3333
+      NODE_ENV: test
+      DB_DIALECT: postgres
+
+      # API - Database 
+      DB_HOST: ${{ secrets.DB_HOST }}
+      DB_USER: ${{ secrets.DB_USER }}
+      DB_PASS: ${{ secrets.DB_PASSWORD }}
+      DB_NAME: ${{ secrets.DB_DATABASE }}
+      DB_PORT: ${{ secrets.DB_PORT }}
+      DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+      DB_DATABASE: ${{ secrets.DB_DATABASE }}
+
+      # Auth
+      ADMIN_USER: ${{ secrets.ADMIN_USER }}
+      ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+      ADMIN_NAME: ${{ secrets.ADMIN_NAME }}
+      ADMIN_TOKEN: ${{ secrets.ADMIN_TOKEN }}
+      ADMIN_ID: ${{ secrets.ADMIN_ID }}
+
     steps:
       # Playwright repo
       - name: Checkout Playwright repo
@@ -38,7 +64,7 @@ jobs:
         working-directory: zombieplus/api
         run: npm run start:ci &
 
-      # Web (build já commitado)
+      # Web
       - name: Install Web dependencies
         working-directory: zombieplus/web
         run: npm install

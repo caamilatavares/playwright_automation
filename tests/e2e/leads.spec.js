@@ -5,7 +5,7 @@ const { executeSQL } = require('../support/database')
 import { faker } from '@faker-js/faker'
 
 test.beforeAll(async () => {
-    await executeSQL(`DELETE FROM leads;`)
+await executeSQL(`DELETE FROM leads;`)
 })
 
 test('Should registrate a lead on the wait list', async ({ page }) => {
