@@ -55,6 +55,14 @@ jobs:
           ref: main
           path: zombieplus
 
+      - name: 🔍 Verify ENV before API start
+        run: |
+        echo "DB_HOST: ${DB_HOST:+SET}"
+        echo "DB_USER: ${DB_USER:+SET}"
+        echo "DB_PASS: ${DB_PASS:+SET}"
+        echo "DB_NAME: ${DB_NAME:+SET}"
+        echo "DB_PORT: ${DB_PORT:+SET}"
+
       # API
       - name: Install API dependencies
         working-directory: zombieplus/api
