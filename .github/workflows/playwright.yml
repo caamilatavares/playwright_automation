@@ -17,6 +17,8 @@ jobs:
       BASE_URL: ${{ secrets.BASE_URL }}
 
       # API - App
+      env:
+      CI: true
       PORT: 3333
       NODE_ENV: test
       DB_DIALECT: postgres
