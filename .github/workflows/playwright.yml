@@ -2,9 +2,9 @@ name: Playwright Tests
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   test:
@@ -12,23 +12,21 @@ jobs:
     timeout-minutes: 60
 
     env:
-      # Playwright / Web
+      # Web / API
       BASE_API: ${{ secrets.BASE_API }}
       BASE_URL: ${{ secrets.BASE_URL }}
 
-      # API - App
+      # API
       PORT: 3333
       NODE_ENV: test
       DB_DIALECT: postgres
 
-      # API - Database.
+      # Database
       DB_HOST: ${{ secrets.DB_HOST }}
       DB_USER: ${{ secrets.DB_USER }}
       DB_PASS: ${{ secrets.DB_PASSWORD }}
       DB_NAME: ${{ secrets.DB_DATABASE }}
       DB_PORT: ${{ secrets.DB_PORT }}
-      DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-      DB_DATABASE: ${{ secrets.DB_DATABASE }}
 
       # Auth
       ADMIN_USER: ${{ secrets.ADMIN_USER }}
@@ -38,16 +36,14 @@ jobs:
       ADMIN_ID: ${{ secrets.ADMIN_ID }}
 
     steps:
-      # Playwright repo
       - name: Checkout Playwright repo
         uses: actions/checkout@v4
 
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 24.12.0
+          node-version: 20
 
-      # ZombiePlus monorepo
       - name: Checkout ZombiePlus (API + Web)
         uses: actions/checkout@v4
         with:
@@ -55,15 +51,14 @@ jobs:
           ref: main
           path: zombieplus
 
-      - name: 🔍 Verify ENV before API start
+      - name: Verify ENV before API start
         run: |
-        echo "DB_HOST: ${DB_HOST:+SET}"
-        echo "DB_USER: ${DB_USER:+SET}"
-        echo "DB_PASS: ${DB_PASS:+SET}"
-        echo "DB_NAME: ${DB_NAME:+SET}"
-        echo "DB_PORT: ${DB_PORT:+SET}"
+          echo "DB_HOST: ${DB_HOST:+SET}"
+          echo "DB_USER: ${DB_USER:+SET}"
+          echo "DB_PASS: ${DB_PASS:+SET}"
+          echo "DB_NAME: ${DB_NAME:+SET}"
+          echo "DB_PORT: ${DB_PORT:+SET}"
 
-      # API
       - name: Install API dependencies
         working-directory: zombieplus/api
         run: npm install
@@ -72,7 +67,6 @@ jobs:
         working-directory: zombieplus/api
         run: npm run start:ci &
 
-      # Web
       - name: Install Web dependencies
         working-directory: zombieplus/web
         run: npm install
@@ -81,14 +75,12 @@ jobs:
         working-directory: zombieplus/web
         run: npm run start:ci &
 
-      # Wait
       - name: Wait for API
         run: npx wait-on http://localhost:3333 --timeout 20000
 
       - name: Wait for Web
         run: npx wait-on http://localhost:3000 --timeout 20000
 
-      # Playwright
       - name: Install test dependencies
         run: npm install
 
