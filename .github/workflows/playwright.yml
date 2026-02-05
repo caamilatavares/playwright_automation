@@ -22,6 +22,7 @@ jobs:
       PORT: 3333
       NODE_ENV: test
       DB_DIALECT: postgres
+      DOTENV_CONFIG_PATH: /dev/null
 
       # API - Database (MAPEADO DUPLO PARA EVITAR ERRO DE SENHA)
       DB_HOST: ${{ secrets.DB_HOST }}
@@ -58,9 +59,6 @@ jobs:
           repository: caamilatavares/zombieplus-package
           ref: main
           path: zombieplus
-
-      - name: Remove .env files
-        run: rm -f .env .env.test
 
       # API
       - name: Install API dependencies
