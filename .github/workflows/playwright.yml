@@ -59,15 +59,8 @@ jobs:
           ref: main
           path: zombieplus
 
-      # DEBUG DE ENV (CONFIRMA QUE A SENHA É STRING)
-      - name: Debug DB ENV
-        run: |
-          node -e "console.log({
-            DB_HOST: !!process.env.DB_HOST,
-            DB_USER: !!process.env.DB_USER,
-            DB_PASSWORD: process.env.DB_PASSWORD ? 'SET' : 'UNDEFINED',
-            TYPE: typeof process.env.DB_PASSWORD
-          })"
+      - name: Remove .env files
+        run: rm -f .env .env.test
 
       # API
       - name: Install API dependencies
