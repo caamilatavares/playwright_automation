@@ -45,7 +45,7 @@ jobs:
     steps:
       # 1️⃣ Checkout repo de testes (Playwright)
       - name: Checkout Playwright repo
-        uses: actions/checkout@v4  uses: actions/checkout@v4
+        uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
