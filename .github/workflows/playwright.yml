@@ -46,9 +46,7 @@ jobs:
       # 1️⃣ Checkout repo de testes (Playwright)
       - name: Checkout Playwright repo
         uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-
+    
       # 2️⃣ Setup Node.js
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -62,6 +60,7 @@ jobs:
           repository: caamilatavares/zombieplus-package
           ref: main
           path: zombieplus
+          token: ${{ secrets.CI_GITHUB_TOKEN }}
 
       # 4️⃣ API
       - name: Install API dependencies
