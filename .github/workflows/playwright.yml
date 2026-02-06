@@ -72,7 +72,7 @@ jobs:
 
       - name: Start Web
         working-directory: zombieplus/web
-        run: npm start:ci &
+        run: npm run start:ci &
 
       # 6️⃣ Wait services
       - name: Wait for API
