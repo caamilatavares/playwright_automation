@@ -91,7 +91,7 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: Run Playwright tests
-        run: npx playwright test
+        run: PW_DISABLE_DOTENV=1 npx playwright test
 
       # 8️⃣ Upload report
       - name: Upload Playwright Report
