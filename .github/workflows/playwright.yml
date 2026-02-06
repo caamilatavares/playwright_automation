@@ -20,6 +20,7 @@ jobs:
       # Playwright / Web
       BASE_API: ${{ secrets.BASE_API }}
       BASE_URL: ${{ secrets.BASE_URL }}
+      APP_NAME: ${{ secrets.APP_NAME }}
 
       # Database
       DB_HOST: ${{ secrets.DB_HOST }}
