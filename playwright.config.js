@@ -1,7 +1,6 @@
-// @ts-check
 import { defineConfig, devices } from '@playwright/test';
 
-require('dotenv').config()
+require('dotenv');
 
 /**
  * Read environment variables from file.
@@ -15,6 +14,7 @@ require('dotenv').config()
  * @see https://playwright.dev/docs/test-configuration
  */
 export default defineConfig({
+  quiet: true,
   timeout: 80000,
   testDir: './tests',
   /* Run tests in files in parallel */

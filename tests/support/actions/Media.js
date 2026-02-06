@@ -59,7 +59,7 @@ export class Media {
         await this.page.waitForLoadState('networkidle')
 
         const coverName = await this.page.locator(`img[alt='${title}']`)
-        expect(coverName).toBeVisible()
+        await expect(coverName).toBeVisible()
     }
 
     // Search for a media on the list
