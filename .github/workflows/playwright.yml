@@ -38,15 +38,17 @@ jobs:
       ADMIN_ID: ${{ secrets.ADMIN_ID }}
 
     steps:
-      # Checkout repos
+      # 1️⃣ Checkout repo de testes (Playwright)
       - name: Checkout Playwright repo
         uses: actions/checkout@v4
 
+      # 2️⃣ Setup Node.js
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 24
 
+      # 3️⃣ Checkout ZombiePlus (API + Web) em subpasta "zombieplus"
       - name: Checkout ZombiePlus (API + Web)
         uses: actions/checkout@v4
         with:
@@ -54,32 +56,32 @@ jobs:
           ref: main
           path: zombieplus
 
-      # API
+      # 4️⃣ API
       - name: Install API dependencies
-        working-directory: caamilatavares/zombieplus-package/api
+        working-directory: zombieplus/api
         run: npm install
 
       - name: Start API
-        working-directory: caamilatavares/zombieplus-package/api
+        working-directory: zombieplus/api
         run: node src/server.js &
 
-      # Web
+      # 5️⃣ Web
       - name: Install Web dependencies
-        working-directory: caamilatavares/zombieplus-package/web
+        working-directory: zombieplus/web
         run: npm install
 
       - name: Start Web
-        working-directory: caamilatavares/zombieplus-package/web
+        working-directory: zombieplus/web
         run: node src/server.js &
 
-      # Wait services
+      # 6️⃣ Wait services
       - name: Wait for API
         run: npx wait-on http://localhost:3333 --timeout 30000
 
       - name: Wait for Web
         run: npx wait-on http://localhost:3000 --timeout 30000
 
-      # Playwright
+      # 7️⃣ Playwright
       - name: Install test dependencies
         run: npm install
 
@@ -89,6 +91,7 @@ jobs:
       - name: Run Playwright tests
         run: npx playwright test
 
+      # 8️⃣ Upload report
       - name: Upload Playwright Report
         if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v4
