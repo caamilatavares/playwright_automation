@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test:local": "npx playwright test",
+    "test:ci": "PW_DISABLE_DOTENV=1 npx playwright test"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",

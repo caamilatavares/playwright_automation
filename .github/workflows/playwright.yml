@@ -85,13 +85,13 @@ jobs:
 
       # 7️⃣ Playwright
       - name: Install test dependencies
-        run: npm install
+        run: npm ci
 
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
       - name: Run Playwright tests
-        run: PW_DISABLE_DOTENV=1 npx playwright test
+        run: npm run test:ci
 
       # 8️⃣ Upload report
       - name: Upload Playwright Report
