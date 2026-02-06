@@ -16,7 +16,8 @@ jobs:
       NODE_ENV: test
       PORT: 3333
       DB_DIALECT: postgres
-
+      PW_DISABLE_DOTENV: 1
+    
       # Playwright / Web
       BASE_API: ${{ secrets.BASE_API }}
       BASE_URL: ${{ secrets.BASE_URL }}

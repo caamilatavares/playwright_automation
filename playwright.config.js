@@ -1,9 +1,5 @@
 import { defineConfig, devices } from '@playwright/test';
 
-if (!process.env.CI) {
-  // Só carrega dotenv se NÃO estiver rodando no CI
-  require('dotenv').config();
-}
 /**
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
@@ -16,6 +12,7 @@ if (!process.env.CI) {
  * @see https://playwright.dev/docs/test-configuration
  */
 export default defineConfig({
+  envFile: null,
   timeout: 80000,
   testDir: './tests',
   /* Run tests in files in parallel */
