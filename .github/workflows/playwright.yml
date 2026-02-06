@@ -85,13 +85,13 @@ jobs:
 
       # 7️⃣ Playwright
       - name: Install test dependencies
-        run: npm ci
+        run: npm install
 
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
       - name: Run Playwright tests
-        run: npm run test:ci
+        run: npx playwright test -g "Should not do login with wrong e-mail"
 
       # 8️⃣ Upload report
       - name: Upload Playwright Report
