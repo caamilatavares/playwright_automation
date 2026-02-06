@@ -56,20 +56,20 @@ jobs:
 
       # API
       - name: Install API dependencies
-        working-directory: zombieplus/api
+        working-directory: caamilatavares/zombieplus-package/api
         run: npm install
 
       - name: Start API
-        working-directory: zombieplus/api
+        working-directory: caamilatavares/zombieplus-package/api
         run: node src/server.js &
 
       # Web
       - name: Install Web dependencies
-        working-directory: zombieplus/web
+        working-directory: caamilatavares/zombieplus-package/web
         run: npm install
 
       - name: Start Web
-        working-directory: zombieplus/web
+        working-directory: caamilatavares/zombieplus-package/web
         run: node src/server.js &
 
       # Wait services
