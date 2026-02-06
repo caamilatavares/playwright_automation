@@ -91,7 +91,7 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: Run Playwright tests
-        run: npx playwright test -g "Should not do login with wrong e-mail"
+        run: npx playwright test -g "Should do login as an administrator"
 
       # 8️⃣ Upload report
       - name: Upload Playwright Report
