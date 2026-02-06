@@ -12,25 +12,21 @@ jobs:
     timeout-minutes: 60
 
     env:
+      CI: true
+      NODE_ENV: test
+      PORT: 3333
+      DB_DIALECT: postgres
+
       # Playwright / Web
       BASE_API: ${{ secrets.BASE_API }}
       BASE_URL: ${{ secrets.BASE_URL }}
 
-      # API - App
-      env:
-      CI: true
-      PORT: 3333
-      NODE_ENV: test
-      DB_DIALECT: postgres
-
-      # API - Database (MAPEADO DUPLO PARA EVITAR ERRO DE SENHA)
+      # Database
       DB_HOST: ${{ secrets.DB_HOST }}
       DB_USER: ${{ secrets.DB_USER }}
       DB_PORT: ${{ secrets.DB_PORT }}
-
       DB_PASS: ${{ secrets.DB_PASSWORD }}
       DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-
       DB_NAME: ${{ secrets.DB_DATABASE }}
       DB_DATABASE: ${{ secrets.DB_DATABASE }}
 
@@ -42,16 +38,15 @@ jobs:
       ADMIN_ID: ${{ secrets.ADMIN_ID }}
 
     steps:
-      # Repo de testes Playwright
+      # Checkout repos
       - name: Checkout Playwright repo
         uses: actions/checkout@v4
 
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
 
-      # Monorepo ZombiePlus (API + Web)
       - name: Checkout ZombiePlus (API + Web)
         uses: actions/checkout@v4
         with:
@@ -66,7 +61,7 @@ jobs:
 
       - name: Start API
         working-directory: zombieplus/api
-        run: npm run start:ci &
+        run: node src/server.js &
 
       # Web
       - name: Install Web dependencies
@@ -75,7 +70,7 @@ jobs:
 
       - name: Start Web
         working-directory: zombieplus/web
-        run: npm run start:ci &
+        run: node src/server.js &
 
       # Wait services
       - name: Wait for API
